@@ -6,7 +6,8 @@ def prime(x,y):
 #error in function prime    
     
 def prime_factor(x):
-    for n in range(2,x):
+    for n in range(2, int(x**.5)+1):
+#got idea for sqrt function from online forum; makes code much quicker.
         if x%n==0:
             factors.append(n)
     for y in factors:
