@@ -1,4 +1,4 @@
-palindromes=[]
+match=[]
 sequence=[]
 
 def palindrome(x):
@@ -9,7 +9,7 @@ def palindrome(x):
         for x in sequence:
             num+=str(x)
         if n == int(num):
-            palindromes.append(n)
-    print(palindromes)
-
+            match.append(n)
+    print(match[len(match)-1])
+    
 palindrome(999999)
