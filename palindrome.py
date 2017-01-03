@@ -1,7 +1,10 @@
-match=[]
-sequence=[]
+
+
+
 
 def palindrome(x):
+    match=[]
+    sequence=[]
     for n in range (11, x):
         sequence = list(str(n))
         sequence.reverse()
@@ -10,6 +13,17 @@ def palindrome(x):
             num+=str(x)
         if n == int(num):
             match.append(n)
-    print(match[len(match)-1])
+    greatest=(match[len(match)-1])
+    print("Greatest palindrome is " + str(greatest))
+    return greatest
     
-palindrome(999999)
+def factor(n):
+    factors=[]
+    for x in range(2, int(n**.5)+1):
+        if n%x == 0:
+            factors.append(x)
+    print("Factors:")
+    print(factors)
+
+greatest=palindrome(999999)
+factor(greatest)
