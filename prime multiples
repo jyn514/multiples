@@ -1,0 +1,13 @@
+def prime(x):
+    factors, primes=[],[]
+    for n in range(2,x):
+        if x%n==0:
+            factors.append(n)
+
+    for y in factors:
+        for z in range(2,x):
+            if y%z!=0:
+                factors.append(y)
+
+prime(int(input(">prime:")))
+print(primes)
