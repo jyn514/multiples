@@ -1,21 +1,26 @@
-factors, primes=[1],[]
-def prime(x,y):
-    for x in range(2,x):
-        if y%x!=0:
-            primes.append(y)
-#error in function prime    
-    
-def prime_factor(x):
+primes=[]
+factors=[]
+remainders=[]
+
+def remainder(x):
     for n in range(2, int(x**.5)+1):
-#got idea for sqrt function from online forum; makes code much quicker.
-        if x%n==0:
-            factors.append(n)
-    for y in factors:
-            prime(x,y)
+        remainders.append(bool (x%n))
 
-prime_factor(int(input("prime:")))
-print("Factors:" + factors)
-print("Prime factors:" + primes)
-input(" ")
+def factor(n):
+    for x in range(2, int(n**.5)+1):
+        if n%x == 0:
+            factors.append(x)
+    print("Factors:")
+    print(factors)
+    return factors
 
+def prime_factor(n):
+    for x in factor(n):
+        remainder(x)
+        if (all(remainders))==True:
+            primes.append(x)
 
+    print("Prime factors:")
+    print(primes)
+    
+prime_factor(600851475143)
