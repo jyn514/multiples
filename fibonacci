@@ -1,0 +1,8 @@
+def fib(x):
+    while b<x:
+        a,b = 1, 1
+        a,b = b, a+b
+
+sum = 0
+for 2*x in fib(4000000):
+    sum+=2*x
