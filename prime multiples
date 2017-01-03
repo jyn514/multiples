@@ -1,13 +1,16 @@
+factors, primes=[],[]
 def prime(x):
-    factors, primes=[],[]
     for n in range(2,x):
         if x%n==0:
             factors.append(n)
-
+#this bit is working
     for y in factors:
         for z in range(2,x):
-            if y%z!=0:
-                factors.append(y)
+            if (y%z)!=0:
+                primes.append(y)
+#error here
+prime(int(input("prime:")))
+print(factors)
+input(" ")
 
-prime(int(input(">prime:")))
-print(primes)
+
