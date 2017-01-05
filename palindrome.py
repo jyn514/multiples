@@ -5,7 +5,7 @@
 def palindrome(x):
     match=[]
     sequence=[]
-    for n in range (11, x):
+    for n in range (x, 10, -1):
         sequence = list(str(n))
         sequence.reverse()
         num=""
@@ -13,7 +13,7 @@ def palindrome(x):
             num+=str(x)
         if n == int(num):
             match.append(n)
-    greatest=(match[len(match)-1])
+    greatest=match[0]
     print("Greatest palindrome is " + str(greatest))
     return greatest
     
