@@ -1,26 +1,24 @@
-primes=[]
-factors=[]
-remainders=[]
-
-def remainder(x):
-    for n in range(2, int(x**.5)+1):
-        remainders.append(bool (x%n))
+def prime(x):
+    remainders = []
+    if (x == 2):
+        return 1
+    for y in range(2, x-1):
+        remainders.append(bool (x%y))
+    if all(remainders):
+        return 1
+    else:
+        return 0
 
 def factor(n):
-    for x in range(2, int(n**.5)+1):
+    factors = []
+    for x in range(2, int(n/2)+1):
         if n%x == 0:
             factors.append(x)
-    print("Factors:")
-    print(factors)
     return factors
 
 def prime_factor(n):
+    primes=[]
     for x in factor(n):
-        remainder(x)
-        if (all(remainders))==True:
+        if (prime(x)):
             primes.append(x)
-
-    print("Prime factors:")
-    print(primes)
-    
-prime_factor(600851475143)
+    return primes
