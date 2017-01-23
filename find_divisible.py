@@ -1,14 +1,3 @@
-def divisible(n, x, y):
-    match = []
-    for a in range(x, y+1):
-        if n%a == 0:
-            match.append(a)
-    if match==list(range(x, y+1)):
-        print("match")
-        return "match"
-    else:
-        print("no match")
-
 def factor(n):
     factors=[]
     for x in range(2, int(n**.5)+1):
@@ -16,13 +5,31 @@ def factor(n):
             factors.append(x)
     return factors
 
+def prime_factor(n):
+    primes = []
+    for x in range(2, int(n/2)+1):
+        if not n%x:
+            if all(x%y != 0 for y in range(2, x)):
+                primes.append(x)
+    return primes 
+
 def find_divisible(x, y):
+    factor_guess = list(range(x, y+1))
+    factor_necc = []
+    for g in factor_guess:
+      if factor_necc==[]:
+        factor_necc.append(g)
+      else:
+        for n in factor_necc:
+         if not g%n:
+           factor_necc.append(g)
+    print(factor_necc)
     product = 1
     for x in range(x, y+1):
         product*=x
     print(product)
-    if divisible(product, x, y) == "match":
-        factors = set(factor(product))
-        print (sorted(factors))
-    else:
-        print("error")
+    factors = factor(product)
+    for f in factors:
+      if f>y:
+        factors.remove(f)
+    print (sorted(set(factors)))
