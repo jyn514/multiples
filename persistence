@@ -1,0 +1,10 @@
+def persistence(n):
+    temp = list(str(n))
+    tries = 0
+    while len(temp) != 1:
+        product = 1
+        for x in temp:
+            product *= int(x)
+        temp = str(product)
+        tries += 1
+    return tries
