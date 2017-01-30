@@ -1,0 +1,9 @@
+import math
+def get_middle(s):
+    #use median
+    length = len(s)
+    if length%2 != 0:
+        print("\"" + str(s[int(length/2)]) + "\"")
+    else:
+        median = length/float(2)
+        print("\"" + str(s[int(median)-1] + s[int(median)]) + "\"")
