@@ -1,6 +1,2 @@
 def Descending_Order(num):
-    order = list(str(num))
-    order.sort()
-    order.reverse()
-    num = ''.join(order)
-    return int(num)
+    return int(''.join(sorted(str(num), reverse=True)))
