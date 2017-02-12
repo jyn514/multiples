@@ -1,0 +1,21 @@
+from math import factorial
+def find_e(digits):
+    approx,k=1,1
+    certain=0
+    if digits>17:
+        digits=17
+        print("This function does not support accuracy larger than a 32-bit number.")
+    while certain<=digits:
+        spare=approx
+        approx+=1/(factorial(k))
+        k+=1
+        sl=list(str(spare))
+        al=list(str(approx))
+        if sl[certain]==al[certain]:
+            certain+=1
+#returns only digits that are certain        
+    round(approx, certain)
+    new=list(str(approx))
+    new=new[:certain]
+    return float("".join(new))
+    
