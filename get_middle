@@ -1,4 +1,3 @@
-import math
 def get_middle(s):
     #use median
     length = len(s)
