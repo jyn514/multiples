@@ -1,6 +1,7 @@
 from random import randint
 from linecache import getline
-from shutil import get_terminal_size
+##from shutil import get_terminal_size
+##this didn't work on Python shell
 PICTURES = ['''
 
  +---+
