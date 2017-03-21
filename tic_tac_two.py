@@ -48,11 +48,14 @@ def player_turn():
         print("That is not a number between one and nine.\n"
                          "Please choose a quadrant from 1-9.\n")
         move = player_turn()
+#haven't tested this recursion, if it does work i'll be very happy
     return move
 
 def play_again():
     games += 1
+#increments before printing because it starts at zero.
     print("You have played {} games.".format(games))
+#bug: will print 'You have played 1 games' after first game
     if input("Do you want to play again?\n").startswith('y'):
         return True
     else:
@@ -92,6 +95,7 @@ def myformat(moves, line):
         print("Fatal error. Please bash the programmer on the head, but not too hard or he won't fix the problem.")
 
 def gameWin(moves, team):
+#this is so clunky
     if ( (moves[1]==moves[4]==moves[7] ==team)  #left column
     or (moves[1]==moves[2]==moves[3] ==team)      #top row
     or (moves[1]==moves[5]==moves[9]==team)      #diagonal
@@ -158,5 +162,6 @@ ____|____|____
         |        |    
         |        |    
         |        |    
+I promise it looked nicer in idle
 """
 
