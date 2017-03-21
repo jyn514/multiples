@@ -12,5 +12,5 @@ def fibonacci(n, *option, **kwarg):
             t+=1
         print(a)
     else:
-        print("You entered an option that is not available.")
+        print("You entered an option that is not available.\nOptions: 'all'")
     

@@ -1,6 +1,7 @@
 from random import randint
 from linecache import getline
-from shutil import get_terminal_size
+##from shutil import get_terminal_size
+##this didn't work on Python shell
 PICTURES = ['''
 
  +---+
@@ -72,7 +73,7 @@ def randword(min_length, max_length, dictionary):
     word = getline(dictionary, randint(1, len(DICT.readlines()))).strip()
     DICT.close()
     if (len(word) > max_length) or (len(word) < min_length) or ("'" in word):
-        word = randword(min_length, max_length)
+        word = randword(min_length, max_length, dictionary)
     return word
 def showBoard(secretWord, errors, correctGuesses):
     try:
@@ -143,7 +144,8 @@ def main():
         elif game_type.startswith('f'):
             secretWord = input("Please enter a word for your friend to guess. " +
                                "The screen will clear after you press enter.\n")
-#doesn't work in python shell        print("\n" * get_terminal_size().lines)
+#doesn't work in python shell
+#            print("\n" * get_terminal_size().lines)
             print("\n" * 50)
         else:
             game_type = input("Sorry, I didn't recognize that option. " +
@@ -154,7 +156,10 @@ def main():
         if guess in secretWord or guess == secretWord:
             print("Good guess!")
             correctGuesses.append(guess)
-            correct+=1
+            correct=0
+            for i in range(len(secretWord)):
+                if secretWord[i] in correctGuesses:
+                    correct+=1
             if correct == len(secretWord):
                 print("You've won! Congratulations!")
                 break
