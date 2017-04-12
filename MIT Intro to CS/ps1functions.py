@@ -25,10 +25,10 @@ def apr_in():
         apr = .18
     elif float(stdin) >= 1:
         apr = float(stdin)/100
-    elif float(apr) <= 0:
+    elif float(stdin) <= 0:
        raise ValueError
     else:
-        apr = float(stdin5)
+        apr = float(stdin)
     return apr
 
 def get_apr():
@@ -54,6 +54,7 @@ def payment_in():
 #future update: allow format "yearly payment/12"
 
 def get_payment():
+    payment = 0
     while not payment:
         try:
             payment = payment_in()

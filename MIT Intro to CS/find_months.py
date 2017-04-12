@@ -1,5 +1,8 @@
 from ps1functions import *
 
+P = get_principle()
+apr = get_apr()
+payment = get_payment()
 def find_months(principle, payment, apr):
     if apr/12 > payment:
         print("The montly payment is less than the starting increase in interest. "
@@ -14,3 +17,4 @@ def find_months(principle, payment, apr):
         print(str(principle) + " " + str(months))
     print("It would take {} months to pay off the loan with the given parameters.".format(months))
     return months
+find_months(P, payment, apr)
