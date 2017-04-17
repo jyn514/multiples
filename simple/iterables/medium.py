@@ -62,3 +62,11 @@ def make_chocolate(small, big, goal):
   else:
     big_used = min(goal // 5, big)
     return goal - 5*big_used
+
+  def close_far(a, b, c):
+  if abs(a - b) <=1 and abs(c-b) >= 2 and abs(c-a) >=2:
+      return True
+  elif abs(a - c) <= 1 and abs(b-c)>= 2 and abs(b - a)>=2:
+    return True
+  else:
+    return False
