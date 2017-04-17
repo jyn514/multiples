@@ -34,3 +34,11 @@ def lone_sum(*arg):
     sum += i
   return sum
 ##inefficient, want to clean this up
+def lucky_sum(*args):
+  sum = 0
+  for x in args:
+    if x==13:
+      return sum
+    else:
+      sum += x
+  return sum
