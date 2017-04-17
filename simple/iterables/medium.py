@@ -42,3 +42,16 @@ def lucky_sum(*args):
     else:
       sum += x
   return sum
+
+def no_teen_sum(*args):
+  sum = 0
+  for x in args:
+    if x not in [13, 14, 17, 18, 19]:
+      sum += x
+  return sum
+
+def round_sum(*args):
+  sum = 0
+  for x in args:
+    sum += round(x, -1)
+  return int(sum)
