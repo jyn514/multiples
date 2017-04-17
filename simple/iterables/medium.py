@@ -9,6 +9,16 @@ def end_other(a, b):
   return a==b[-len(a):] or b==a[-len(b):]
 ##but the easy way was b.endswith(a)
 
+def make_bricks(small, big, goal):
+  if small + big*5 < goal:
+    return False
+  elif (big < goal // 5) and (small < goal % 5):
+    return False
+  elif small < goal % 5:
+    return False
+  else:
+    return True
+
 def lone_sum(*arg): 
   List = []
   for i in arg:
