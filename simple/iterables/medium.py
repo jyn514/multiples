@@ -55,3 +55,10 @@ def round_sum(*args):
   for x in args:
     sum += round(x, -1)
   return int(sum)
+
+def make_chocolate(small, big, goal):
+  if small + big*5 < goal or small < goal%5 or (big < goal // 5 and small < goal % 5):
+    return -1
+  else:
+    big_used = min(goal // 5, big)
+    return goal - 5*big_used
