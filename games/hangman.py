@@ -118,11 +118,11 @@ def main():
     correct = 0
     secretWord = 'error'
     game_type = input("Would you like to play against the computer or a friend? " +
-             "[[computer|friend]\n").lower()
+             "[computer|friend]\n>>").lower()
     while secretWord == 'error':
         if game_type.startswith('c'):
             difficulty = input("Easy, medium, or hard? " +
-                               "(This option controls the length of the word)\n")
+                               "(This option controls the length of the word)\n>>")
             min_length = -1
             while min_length == -1:
                 if difficulty.startswith('h'):
