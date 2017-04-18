@@ -1,5 +1,6 @@
 from random import randint
 from linecache import getline
+import urllib.request
 ##from shutil import get_terminal_size
 ##this didn't work on Python shell
 PICTURES = ['''
@@ -68,8 +69,11 @@ PICTURES = ['''
      |
 ==========''']
 def randword(min_length, max_length, dictionary):
+    if dictionary.startswith("http"):
+        DICT = urllib.request.urlopen(dictionary)
 #american-english-small can be replaced with american-english[-large|-huge]
-    DICT = open(dictionary, 'r')
+    else:
+        DICT = open(dictionary, 'r')
     word = getline(dictionary, randint(1, len(DICT.readlines()))).strip()
     DICT.close()
     if (len(word) > max_length) or (len(word) < min_length) or ("'" in word):
@@ -128,15 +132,15 @@ def main():
                 if difficulty.startswith('h'):
                     min_length = 7
                     max_length = 100
-                    dictionary = "/usr/share/dict/american-english-huge"
+                    dictionary = "https://raw.githubusercontent.com/jyn514/python-challenges/master/games/dict/american-english-large"
                 elif difficulty.startswith('m'):
                     min_length = 4
                     max_length = 8
-                    dictionary = "/usr/share/dict/american-english"
+                    dictionary = "https://raw.githubusercontent.com/jyn514/python-challenges/master/games/dict/american-english"
                 elif difficulty.startswith('e'):
                     min_length = 0
                     max_length = 6
-                    dictionary = "/usr/share/dict/american-english-small"
+                    dictionary = "https://raw.githubusercontent.com/jyn514/python-challenges/master/games/dict/american-english-small"
                 else:
                     difficulty = input("Sorry, I don't understand. " +
                                        "Easy, medium, or hard?\n")
