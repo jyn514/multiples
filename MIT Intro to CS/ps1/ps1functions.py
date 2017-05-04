@@ -4,8 +4,10 @@ def months_in():
     stdin = input("Enter the time, in months, in which you wish to pay off your loan [default 120]: ")
     if stdin == "":
         return 120
-    elif float(stdin) <= 0:
-        raise ValueError
+    elif float(stdin) == 0:
+        print("This input doesn't make sense. If you take out a loan, you don't repay it immediately. Please enter something else.")
+    elif float(stdin) < 0:
+        print("This input doesn't make sense. You can't pay a loan in negative time. Please enter something else.")
     else:
         return float(stdin)
 
@@ -66,7 +68,7 @@ def get_payment():
     return payment
 
 def principle_in():
-    stdin = (input("Enter principle of loan as a positive number [default 5000]: "))
+    stdin = input("Enter principle of loan as a positive number [default 5000]: ")
     if stdin == "":
         principle = 5000
     elif float(stdin) <= 0:
