@@ -1,16 +1,17 @@
 def divisors(integer):
-    factors=[]
+    factors = []
     if integer == 2 or integer == 3:
         return [integer]
     elif integer == 1 or integer == 0:
         return []
-    for x in range(2, int(integer/2)+1):
-        if not integer%x:
+    for x in range(2, int(integer / 2) + 1):
+        if not integer % x:
             factors.append(x)
-    if factors==[]:
+    if factors == []:
         return [integer]
     else:
         return factors
+
 
 def prime_factors(x):
     if type(x) == int:

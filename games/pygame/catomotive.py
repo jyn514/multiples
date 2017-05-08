@@ -1,4 +1,5 @@
-import pygame, sys
+import pygame
+import sys
 from pygame.locals import *
 from pygame_colors import *
 
@@ -7,7 +8,7 @@ window = pygame.display.set_mode((400, 300), 0, 32)
 pygame.display.set_caption("Catomotive")
 cat = pygame.image.load('/home/joshua/Documents/Coding/pygame/cat.png')
 catx = 10
-caty= 10
+caty = 10
 direction = 'right'
 
 while True:
@@ -36,5 +37,5 @@ while True:
             sys.exit()
 
     pygame.display.update()
-    #AFFECTS SPEED AS WELL AS REFRESH RATE
+    # AFFECTS SPEED AS WELL AS REFRESH RATE
     pygame.time.Clock().tick(30)

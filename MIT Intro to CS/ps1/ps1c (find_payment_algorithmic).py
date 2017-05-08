@@ -1,6 +1,6 @@
-#Problem Set 1
-#Name: Joshua
-#Time: ~20 minutes
+# Problem Set 1
+# Name: Joshua
+# Time: ~20 minutes
 
 from ps1functions import *
 
@@ -21,9 +21,14 @@ else:
             current_months += 1
             current_interest = interest * loan
             loan = loan - payment + current_interest
-        if loan > 0: #not paying enough
-               min_payment = payment
-        elif loan < 0: #paying too much
+        if loan > 0:    # not paying enough
+            min_payment = payment
+        elif loan < 0:  # paying too much
             max_payment = payment
-        
-print("Monthly payment necessary: {}\nNumber of months taken: {}\nTotal paid: {}\nAmount paid to interest: {}".format(payment, current_months, current_months*payment, current_months*payment - P))
+
+print(("Monthly payment necessary: {}\n" +
+       "Number of months taken: {}\n" +
+       "Total paid: {}\n" +
+       "Amount paid to interest: {}").format(
+    payment, current_months, current_months * payment,
+    current_months * payment - P))

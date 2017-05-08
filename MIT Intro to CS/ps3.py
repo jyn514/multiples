@@ -4,7 +4,7 @@ import random
     player1_name = input("What is your name?\n>>")
     player2_name = input("What is your friend's name?\n>>")
     stdin = ''
-    while stdin == '':     
+    while stdin == '':
         print("Would you like to play against the computer or a friend?")
         stdin = input(">>").lower()
         if stdin.startswith('c'):
@@ -15,14 +15,16 @@ import random
             print("Sorry, I only acce
 """
 
+
 def score(word):
     total = 0
     for char in word.lower():
         total += VALUE[char]
     total *= len(word)
-    if len(word)==hand_size:
+    if len(word) == hand_size:
         total += 50
     return total
+
 
 def import_words():
     print("Loading dictionary file . . . ")
@@ -35,11 +37,13 @@ def import_words():
     dict_file.close()
     return wordlist
 
+
 def show_hand(hand):
     for letter in hand.keys():
         for n in range(hand[letter]):
             print(letter, end=" ")
     print()
+
 
 def deal_hand():
     hand = dict()
@@ -48,11 +52,13 @@ def deal_hand():
         hand[letter] = hand.get(letter, 0) + 1
     return hand
 
+
 def update_hand(hand, word):
-    #must be run after is_valid_word(); assumes all letters are present in hand
+    # must be run after is_valid_word(); assumes all letters are in hand
     for letter in word:
-        hand[letter] -=1
+        hand[letter] -= 1
     return hand
+
 
 def is_valid(word, hand, wordlist):
     if word == '.':
@@ -65,12 +71,14 @@ def is_valid(word, hand, wordlist):
     else:
         return False
 
+
 def hand_length(hand):
-#can I make hand a class?
+    # can I make hand a class?
     length = 0
     for v in hand.values():
         length += v
     return length
+
 
 def input_word(hand):
     valid = False
@@ -80,13 +88,16 @@ def input_word(hand):
     while not valid:
         try:
             valid = is_valid(word, hand, word_list)
-            if valid == False:
-                word = input("That word isn't in my dictionary. Try a different word: ")
+            if not valid:
+                word = input("That word isn't in my dictionary. " +
+                             "Try a different word: ")
         except KeyError:
             if word == ".":
                 raise KeyError
-            word = input("You tried to make a word with letters that aren't in your hand. Try a different word: ")
+            word = input("You tried to make a word with letters " +
+                         "that aren't in your hand. Try a different word: ")
     return word
+
 
 def play_hand(hand, word_list):
     hand_score = 0
@@ -95,19 +106,21 @@ def play_hand(hand, word_list):
             word = input_word(hand)
             print("Good word! You scored {} points. ".format(score(word)))
             print("You can play another word, or type '.' to end your turn.")
-            hand_score+=score(word)
+            hand_score += score(word)
             hand = update_hand(hand, word)
         except KeyError:
             print("Your turn is over.")
             return hand_score
     return hand_score
 
+
 def play_game(word_list):
     total_score = 0
     while True:
         total_score += play_hand(deal_hand(), word_list)
         print("\nYou've scored {} points so far.".format(total_score))
-        stdin = input("Type 'h' to play a new hand, 'n' to play a new game, or 'e' to exit.\n>>").lower()
+        stdin = input("Type 'h' to play a new hand, " +
+                      "'n' to play a new game, or 'e' to exit.\n>>").lower()
         while True:
             if stdin.startswith('n'):
                 play_game(word_list)
@@ -115,15 +128,19 @@ def play_game(word_list):
                 break
             elif stdin.startswith('e'):
                 raise SystemExit
-            stdin = input("Sorry, I only take 'n', 'h', or 'e' as answers. Play again?\n>>").lower()  
+            stdin = input("Sorry, I only take 'n', 'h', or 'e' " +
+                          "as answers. Play again?\n>>").lower()
+
+
 hand_size = 7
 VALUE = {
-    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1,
-    'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10, '':0
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1,
+    'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1,
+    's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10, '': 0
 }
 
 LETTERS = 'abcdefghijklmnopqrstuvwxyz'
-#Feel free to change this dictionary to reduce load times
+# Feel free to change this dictionary to reduce load times
 DICT = "/usr/share/dict/american-english-small"
 
 if __name__ == '__main__':
@@ -136,6 +153,5 @@ if __name__ == '__main__':
         elif stdin == 'e':
             raise SystemExit
         else:
-            stdin = input("Sorry, I only accept 'n' or 'e'. Type 'n' to play a new game, or type 'e' to exit. " +
-                          "If for some reason 'e' isn't working, press Ctrl+C to exit the module or Ctrl+D to force-close.")
-            
+            stdin = input("Sorry, I only accept 'n' or 'e'. " +
+                          "Type 'n' to play a new game, or type 'e' to exit.")

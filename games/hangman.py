@@ -1,8 +1,8 @@
 from random import randint
 from linecache import getline
 import urllib.request
-##from shutil import get_terminal_size
-##this didn't work on Python shell
+# from shutil import get_terminal_size
+# this didn't work on Python shell
 PICTURES = ['''
 
  +---+
@@ -70,7 +70,7 @@ PICTURES = ['''
 ==========''']
 def randword(min_length, max_length, dictionary):
     DICT = urllib.request.urlopen(dictionary)
-#american-english-small can be replaced with american-english[-large|-huge]
+# american-english-small can be replaced with american-english[-large|-huge]
     line = 0
     while line < 50:
         print(getline(dictionary, line))
@@ -112,7 +112,7 @@ def getGuess(errors, correctGuesses, NOTLETTERS):
             inputError = True
         if inputError == False:
             return guess
-#ideas: 2-player; word can be selected
+# ideas: 2-player; word can be selected
 #       easy, medium, hard = length of word
 #       remove caps, conjuctions
 def main():
@@ -147,7 +147,7 @@ def main():
         elif game_type.startswith('f'):
             secretWord = input("Please enter a word for your friend to guess. " +
                                "The screen will clear after you press enter.\n")
-#doesn't work in python shell
+# doesn't work in python shell
 #            print("\n" * get_terminal_size().lines)
             print("\n" * 50)
         else:
