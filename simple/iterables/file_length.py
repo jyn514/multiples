@@ -1,5 +1,4 @@
 def file_length(file):
-    DICT = open(file, 'r')
-    length = len(DICT.readlines())
-    DICT.close()
+    with DICT as open(file, 'r'):
+        length = len(DICT.readlines())
     return length

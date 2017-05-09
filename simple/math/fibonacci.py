@@ -1,6 +1,9 @@
-def fibonacci(n, *option, **kwarg):
+from sys import argv
+
+
+def fibonacci(n, *option):
     t, a, b = 0, 0, 1
-    if ((kwarg == {}) and (option == ())):
+    if option == ():
         while t < n:
             a, b = b, a + b
             t += 1
@@ -13,3 +16,10 @@ def fibonacci(n, *option, **kwarg):
         print(a)
     else:
         print("You entered an option that is not available.\nOptions: 'all'")
+
+
+if __name__ == "__main__":
+    try:
+        fibonacci(int(argv[1]))
+    except IndexError or ValueError:
+        fibonacci(10)

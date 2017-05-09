@@ -1,15 +1,14 @@
+from sys import argv
+
+
 def divisors(integer):
     factors = []
-    if integer == 2 or integer == 3:
-        return [integer]
-    elif integer == 1 or integer == 0:
-        return []
-    for x in range(2, int(integer / 2) + 1):
-        if not integer % x:
-            factors.append(x)
-    if factors == []:
-        return [integer]
+    if integer in [0, 1, 2, 3]:    #corner cases
+        return factors
     else:
+        for x in range(2, int(integer / 2) + 1):
+            if not integer % x:
+                factors.append(x)
         return factors
 
 
@@ -22,3 +21,14 @@ def prime_factors(x):
             if temp != []:
                 factors += temp
     return factors
+
+
+if __name__ == "__main__":
+    try:
+        integer = int(argv[1])
+    except (ValueError, IndexError):
+        integer = 400000
+    print("Factors of {}:".format(integer))
+    for x in divisors(integer):
+        print(x, end=" ")
+    print()
