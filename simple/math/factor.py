@@ -1,6 +1,3 @@
-from sys import argv
-
-
 def divisors(integer):
     factors = []
     if integer in [0, 1, 2, 3]:    #corner cases
@@ -25,9 +22,11 @@ def prime_factors(x):
 
 if __name__ == "__main__":
     try:
+        from sys import argv
         integer = int(argv[1])
-    except (ValueError, IndexError):
+    except (ValueError, IndexError, ImportError):
         integer = 400000
+        print("Using sample input of 400000.")
     print("Factors of {}:".format(integer))
     for x in divisors(integer):
         print(x, end=" ")
