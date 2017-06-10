@@ -1,18 +1,22 @@
 from sys import argv
 
 
-def prime_factor(n):
-    primes = set()
-    for x in range(2, int(n / 2) + 1):
-    # less than half the number and smaller than two
-        if not n % x:
-        # x is a factor
-            if all(x % y != 0 for y in range(2, int(x / 2) + 1)):
-            # x can't be divided evenly
-                primes.add(x)
-    if not primes:  # n is prime
-        primes = [n]
-    return primes
+def prime_factors(n):
+"""Credit to this forum: https://stackoverflow.com/a/22808285"""
+    i = 2
+    # factor to test
+    factors = []
+    while i * i <= n:
+    # `i` can't be prime unless less than sqrt(n)
+        if n % i:
+        # not a factor
+            i += 1
+        else:
+            n //= i
+            print(i)
+    if n > 1:
+        print(n)
+    return factors
 
 
 def prime_tree(n):

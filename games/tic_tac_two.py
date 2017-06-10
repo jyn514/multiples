@@ -1,167 +1,124 @@
-'''how game should run:
+BOARD = """
+       |       |       
+       |       |       
+____|____|____
+       |       |       
+       |       |       
+____|____|____
+       |       |       
+       |       |       
+       |       |       
+"""
 
-#logo
-#detailed instructions
-#main game loop()
-    #set values to null
-    #chose x or o
-    #secondary loop
-        #print board
-        #move
-        #board
-        #other player moves
-        #break on win or loss
-    #if win:
-        #congrats
-    #if loss:
-        #sorry
-    #play again?
-    #if yes:
-        #main game loop()
-    #if no:
-        quit()
-        
-functions:
-    print board(moves)
-    user plays(games)
-    computer plays(moves)
-    win(moves)
+def player_turn(moves):
+    move = input("Choose a quadrant from 1-9.\n")
+    through_ten = [str(x) for x in range(1, 10)]
+    while (move not in through_ten) or moves[int(move) - 1] != '  ' :
+    # input validation
+        print("That is not an available move.")
+        move = input("Choose a quadrant between 1-9\n")
+    return int(move)
 
-lists:
-    moves
 
-variables:
-    games
-    turns
+def print_board(moves):
+    for index, line in enumerate(BOARD.split("\n")):
+        if index == 2:
+            line = "   {}  |   {}  |   {}".format(moves[0], moves[1], moves[2])
+        elif index == 5:
+            line = "   {}  |   {}  |   {}".format(moves[3], moves[4], moves[5])
+        elif index == 8:
+            line = "   {}  |   {}  |   {}".format(moves[6], moves[7], moves[8])
+        print(line)
 
-'''
-from time import sleep
-def player_turn():
-    try:
-        if games ==0:
-            move = int(input("Choose a quadrant from 1-9. Quadrants are numbered from left to right, " 
-              "top to bottom, like a book. \nFor example, quadrant 6 is the "
-              "center-right square, and quadrant 7 is the bottom-left.\n"))
-        else:
-            move = int(input("Choose a quadrant from 1-9.\n"))
-    except:
-        print("That is not a number between one and nine.\n"
-                         "Please choose a quadrant from 1-9.\n")
-        move = player_turn()
-#haven't tested this recursion, if it does work i'll be very happy
-    return move
 
-def play_again():
-    games += 1
-#increments before printing because it starts at zero.
-    print("You have played {} games.".format(games))
-#bug: will print 'You have played 1 games' after first game
-    if input("Do you want to play again?\n").startswith('y'):
-        return True
-    else:
-        return False
+def computer_turn(moves, computer):
+    for i in range(9):          # check all quadrants
+        if moves[i] == '  ':        # make sure space is blank
+            for team in ('x', 'o'):  # check both teams
+                copy =  moves[:]
+                copy[i] = team
+                if game_win(copy, team):
+                    return i
+            if i in (0, 2, 6, 8):
+                return i
+    if moves[i] == '  ':
+        return i
+            
+def board_full(moves):
+    return all(x != '  ' for x in moves)
 
-def myformat(moves, line):
-# there's got to be a better way to do this
-    if line in [1, 4, 7]:
-        if moves[line] == 'x':
-            return "\  /"
-        elif moves[line] == 'o':
-            return " oo "
-        elif moves[line] == 'none':
-            return "    "
-    elif line in [2, 5, 8]:
-        if moves[line] == x:
-            return " xx "
-        elif moves[line] == o:
-            return "o  o"
-        elif moves[line] == "none":
-            return "    "
-    elif line in [3, 6]:
-        if moves[line] == x:
-            return "/__\b"
-        elif moves[line] == o:
-            return "o__o"
-        elif moves[line] == "none":
-            return "____"
-    elif line == 9:
-        if moves[line] == x:
-            return "/__\b"
-        elif moves[line] == o:
-            return "o__o"
-        elif moves[line] == "none":
-            return "    "        
-    else:
-        print("Fatal error. Please bash the programmer on the head, but not too hard or he won't fix the problem.")
-
-def gameWin(moves, team):
-#this is so clunky
-    if ( (moves[1]==moves[4]==moves[7] ==team)  #left column
-    or (moves[1]==moves[2]==moves[3] ==team)      #top row
-    or (moves[1]==moves[5]==moves[9]==team)      #diagonal
-    or (moves[2]==moves[5]==moves[8] == team)     #middle column
-    or (moves[4]==moves[5]==moves[6]==team)       #middle row
-    or (moves[3]==moves[6]==moves[9]==team)       #right column
-    or (moves[7]==moves[8]==moves[9]==team)) :    #bottom row
-        return True
-    else:
-        return False
-
-def main():
+def main(wins, games):
     turns = 0
-    team = 'undecided'
-    moves = ['none']*9
-    while team == 'undecided':
+    team = 's'
+    moves = ['  ']*9
+    while team != 'x' and team != 'o':       # choose a team
         team = input("Do you want to be X or O?\n").lower()
         if team == 'x':
             print("You will go first.")
             computer = 'o'
         elif team == 'o':
             print("The computer will go first.")
-            computer = 'o'
-            moves[ computer_turn() ] = computer
-            sleep(1)
+            computer = 'x'
+            moves[ computer_turn(moves, computer) ] = computer
         else:
             print("Please type 'X' or 'O', or press Ctrl+D to exit.")
-    sleep(1)
-    for line in range(1, 10):
-        print("{}|{}|{}".format((myformat(moves, line))))
-    moves[ player_turn() ] = team
-    for line in range(1, 10):
-        print("{}|{}|{}".format((myformat(moves, line))))
-    moves[ computer_turn() ] = computer
-    if game_win(player):
-        print("You won! You beat the computer in  {} turns.".format(turns))
-        if play_again():
-            main()
-        else:
-            quit()
-    if game_win(computer):
+    while not (game_win(moves, team) or game_win(moves, computer) or board_full(moves)):
+    # secondary loop
+        print_board(moves)
+        moves[ player_turn(moves) - 1] = team
+        turns += 1
+        if '  ' not in moves:     # board is full
+            break
+        moves[ computer_turn(moves, computer) ] = computer
+    print_board(moves)
+    if game_win(moves, team):
+        print("You won! You beat the computer in {} turns.".format(turns))
+        wins += 1
+    elif game_win(moves, computer):
         print("You lost. The computer beat you in {} turns.".format(turns))
-        if play_again():
-            main()
-        else:
-            quit()
+    else:
+        print("The game ended in a tie.")
+    games += 1
+    print("You have won {} times and played a total of {} games.".format(wins, games))
+    if input("Do you want to play again?\n").startswith('y'):
+        main(wins, games)
+    else:
+        quit()
 
-print("Tic\n                 Tac\n                                   Toe\n") #looks nicer with two line breaks at end
-print("Version: 0.1.0")
-print("Welcome to Tic Tac Toe! This is a text-based game against a rudimentary AI. \n"
-      "The controls are responses to simple questions.")
-games = 0
 
-main()
+def game_win(moves, team):
+#this is so clunky
+    return ( (moves[0]==moves[3]==moves[6] ==team)  #left column
+    or (moves[0]==moves[1]==moves[2] ==team)        #top row
+    or (moves[0]==moves[4]==moves[8]==team)         #diagonal
+    or (moves[6] == moves[4] == moves[2] == team)   # other diagonal
+    or (moves[1]==moves[4]==moves[7] == team)       #middle column
+    or (moves[3]==moves[4]==moves[5]==team)         #middle row
+    or (moves[2]==moves[5]==moves[8]==team)         #right column
+    or (moves[6]==moves[7]==moves[8]==team))        #bottom row
 
-""" just because I couldn't bear to delete it
-BOARD = #triple quote
-        |        |     
-        |        |    
+
+if __name__ == "__main__":
+    print("""
+       |       |       
+ Tic |   2  |   3
 ____|____|____
-        |        |    
-        |        |    
+       |       |       
+4     |Tac |    6
 ____|____|____
-        |        |    
-        |        |    
-        |        |    
-I promise it looked nicer in idle
-"""
+       |       |       
+7     |  8   | Toe
+       |       |       
+""") #looks nicer with two line breaks at end
+    print("Version: 1.0.0")
+    print("Welcome to Tic Tac Toe!")
+    games = 0
+    wins = 0
+    print("""
+How to play:
+Choose a quadrant from 1-9.
+Quadrants are numbered from left to right, top to bottom, like a book.
+For example, quadrant 6 is the center-right square, and quadrant 7 is the bottom-left.""")
+    main(games, wins)
+
 
